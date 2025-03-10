@@ -1,0 +1,12 @@
+[package]
+name = "cookbook-rust"
+version = "0.0.1"
+authors = ["motacapla"]
+edition = "2018"
+
+[dependencies]
+ffmpeg-next = "7.1.0"
+
+[[bin]]
+name = "finance"
+path = "src/main.rs"
