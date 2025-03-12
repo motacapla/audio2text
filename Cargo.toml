@@ -5,15 +5,28 @@ authors = ["motacapla"]
 edition = "2021"
 
 [dependencies]
+anyhow = "1.0.97"
+cpal = "0.15.3"
 ffmpeg-next = "7.1.0"
 hound = "3.5.1"
+rubato = "0.16.1"
 whisper-rs = "0.13"
 whisper-rs-sys = "0.11.1"
 
+[env]
+
 [[bin]]
-name = "finance"
-path = "src/main.rs"
+name = "convert"
+path = "src/convert.rs"
 
 [[bin]]
 name = "whisper"
 path = "src/whisper.rs"
+
+[[bin]]
+name = "record"
+path = "src/record.rs"
+
+[[bin]]
+name = "sound-to-text"
+path = "src/sound-to-text.rs"
