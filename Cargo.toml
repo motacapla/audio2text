@@ -13,19 +13,9 @@ rubato = "0.16.1"
 whisper-rs = "0.13"
 whisper-rs-sys = "0.11.1"
 
-[env]
-
 [[bin]]
 name = "convert"
 path = "src/convert.rs"
-
-[[bin]]
-name = "whisper"
-path = "src/whisper.rs"
-
-[[bin]]
-name = "record"
-path = "src/record.rs"
 
 [[bin]]
 name = "sound-to-text"

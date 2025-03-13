@@ -7,7 +7,8 @@ use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use whisper_rs::{FullParams, SamplingStrategy, WhisperContext, WhisperContextParameters};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let model_path = "model/ggml-large-v3.bin";
+    // let model_path = "model/ggml-large-v3.bin";
+    let model_path = "model/ggml-large-v3-turbo.bin";
     let language = "ja";
 
     let params = WhisperContextParameters::default();    
@@ -100,23 +101,27 @@ fn process_audio(state: &mut whisper_rs::WhisperState, params: &FullParams, samp
             let num_segments = state.full_n_segments().expect("セグメント数の取得に失敗");
             let mut text = String::new();
             if num_segments > 0 {
-                println!("文字起こし結果:");
+                // println!("文字起こし結果:");
                 for i in 0..num_segments {
                     let segment = state.full_get_segment_text(i).expect("セグメントの取得に失敗");
                     let start = state.full_get_segment_t0(i).expect("開始時間の取得に失敗");
                     let end = state.full_get_segment_t1(i).expect("終了時間の取得に失敗");
-                    println!("[{} - {}]: {}", start, end, segment);
-                    text += &trim_noise_text(segment);
+                    // println!("[{} - {}]: {}", start, end, segment);
+                    let trimed_segment = &trim_noise_text(segment);
+                    if trimed_segment.len() > 0 {
+                        text += "\n";
+                    }
+                    text += trimed_segment;
                 }
                 println!("-------------------");
-                let mut file = if std::path::Path::new("data/text.txt").exists() {
-                    let mut file = std::fs::OpenOptions::new()
+                let mut file = if std::path::Path::new("data/output.txt").exists() {
+                    let file = std::fs::OpenOptions::new()
                         .append(true)
-                        .open("data/text.txt")
+                        .open("data/output.txt")
                         .expect("ファイルを開けませんでした");
                     file
                 } else {
-                    std::fs::File::create("data/text.txt").expect("ファイルを作成できませんでした")
+                    std::fs::File::create("data/output.txt").expect("ファイルを作成できませんでした")
                 };
                 file.write_all(text.as_bytes()).expect("ファイルへの書き込みに失敗しました");
             }
@@ -128,9 +133,9 @@ fn process_audio(state: &mut whisper_rs::WhisperState, params: &FullParams, samp
 }
 
 fn trim_noise_text(text: String) -> String {
-    let mut result = text;
-    result.push_str("\n");
-    result = result.replace("ご視聴ありがとうございました", "");
-    result = result.replace("ありがとうございました", "");
-    result
+    format!("{}", text)
+        .replace("ご視聴ありがとうございました", "")
+        .replace("ありがとうございました", "")
+        .replace("お疲れ様でした", "")
+        .replace("おやすみなさい", "")
 }
