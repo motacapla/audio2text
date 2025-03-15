@@ -1,7 +1,6 @@
 use anyhow::{anyhow, Result};
-use clap::Parser;
 use std::fs::File;
-use std::path::{Path, PathBuf};
+use std::path::{Path};
 use symphonia::core::audio::{AudioBufferRef, Signal};
 use symphonia::core::codecs::DecoderOptions;
 use symphonia::core::formats::FormatOptions;
@@ -11,20 +10,29 @@ use symphonia::core::probe::Hint;
 use hound::{WavSpec, WavWriter};
 use rubato::{FftFixedIn, Resampler};
 
-#[derive(Parser, Debug)]
-#[command(author, version, about, long_about = None)]
-struct Args {
-    /// 入力m4aファイルのパス
-    #[arg(short, long)]
-    input: PathBuf,
-}
-
-fn main() -> Result<()> {
-    let args = Args::parse();
+fn main() -> Result<()> {    
+    let m4a_files = std::fs::read_dir("./data")?
+        .filter_map(|entry| {
+            let entry = entry.ok()?;
+            let path = entry.path();
+            if path.extension()?.to_str()? == "m4a" {
+                Some(path)
+            } else {
+                None
+            }
+        })
+        .collect::<Vec<_>>();
     
-    let output_path = Path::new("./data/output.wav");
+    if m4a_files.is_empty() {
+        println!("m4aファイルが見つかりませんでした");
+        return Ok(());
+    }
     
-    convert_m4a_to_wav(&args.input, &output_path)?;
+    for input_file in m4a_files {
+        let output_file = input_file.to_string_lossy().to_string().replace(".m4a", ".wav");
+        let output_path = Path::new(&output_file);
+        convert_m4a_to_wav(&input_file, output_path)?;
+    }
     
     Ok(())
 }

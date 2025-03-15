@@ -24,7 +24,7 @@ path = "src/convert.rs"
 name = "sound-to-text"
 path = "src/sound-to-text.rs"
 
-# cargo run --bin convert-m4a -- -i ./data/input.m4a -o ./data/output.wav
+# cargo run --bin convert-m4a -- -i ./data/input.m4a
 [[bin]]
 name = "convert-m4a"
 path = "src/convert-m4a.rs"

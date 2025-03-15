@@ -1,3 +1,4 @@
+import sys
 import whisper
 from pyannote.audio import Pipeline
 from pyannote.audio import Audio
@@ -9,7 +10,12 @@ pipeline = Pipeline.from_pretrained(
     use_auth_token=secret.HF_AUTH_TOKEN,
 )
 
-audio_file = "./data/output.wav"
+if len(sys.argv) > 1:
+    audio_file = sys.argv[1]
+else:
+    print("Usage: python diarizer.py <audio_file>")
+    exit()
+
 diarization = pipeline(audio_file)
 
 audio = Audio(sample_rate=16000, mono=True)

@@ -9,16 +9,16 @@ fn run_diarizer(input_file: &str) -> Result<()> {
     }
 
     let mut cmd = Command::new("python");
-    cmd.arg("src_py/diarizer.py");
-    // cmd.arg("--input").arg(input_file);
+    cmd.arg("src_py/diarizer.py").arg(input_file);
 
     let output = cmd.output()?;
 
     if output.status.success() {
-        println!("diarizer.pyの実行が成功しました");
         if !output.stdout.is_empty() {
             let stdout = String::from_utf8_lossy(&output.stdout);
-            println!("出力:\n{}", stdout);
+            let output_file = format!("{}.txt", input_file).replace(".wav", "");
+            fs::write(&output_file, stdout.as_bytes())?;
+            println!("Done");
         }
         Ok(())
     } else {
@@ -41,7 +41,7 @@ fn main() -> Result<()> {
         .collect::<Vec<_>>();
     
     if wav_files.is_empty() {
-        println!("./dataディレクトリにwavファイルが見つかりませんでした");
+        println!("wavファイルが見つかりませんでした");
         return Ok(());
     }
     
