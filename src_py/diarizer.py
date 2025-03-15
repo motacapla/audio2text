@@ -17,6 +17,6 @@ audio = Audio(sample_rate=16000, mono=True)
 model = whisper.load_model("large-v3-turbo")
 
 for segment, _, speaker in diarization.itertracks(yield_label=True):
-    waveform, sample_rate = audio.crop(audio_file, segment)
+    waveform, _ = audio.crop(audio_file, segment)
     text = model.transcribe(waveform.squeeze().numpy())["text"]
     print(f"[{segment.start:03.1f}s - {segment.end:03.1f}s] {speaker}: {text}")

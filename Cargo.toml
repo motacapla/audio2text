@@ -13,6 +13,9 @@ rubato = "0.16.1"
 whisper-rs = "0.13"
 whisper-rs-sys = "0.11.1"
 
+symphonia = { version = "0.5.4", features = ["aac", "isomp4", "wav"] }
+clap = { version = "4.4", features = ["derive"] }
+
 [[bin]]
 name = "convert"
 path = "src/convert.rs"
@@ -20,3 +23,13 @@ path = "src/convert.rs"
 [[bin]]
 name = "sound-to-text"
 path = "src/sound-to-text.rs"
+
+# cargo run --bin convert-m4a -- -i ./data/input.m4a -o ./data/output.wav
+[[bin]]
+name = "convert-m4a"
+path = "src/convert-m4a.rs"
+
+# cargo run --bin diarizer
+[[bin]]
+name = "diarizer"
+path = "src/diarizer.rs"
