@@ -3,8 +3,13 @@
 ## Diarize audio file from zoom's record
 ### Prerequisites
 - create `data` directory
-- rename m4a file to `input.m4a` and put it in `data` directory
+- put `.m4a` files in `data` directory
 
 ### Run
-$ cargo run --bin convert-m4a -- -i ./data/input.m4a
-$ cargo run --bin diarizer
+```
+$ pipenv install
+$ pipenv run main
+```
+
+### Result
+- `.json` files will be created in `data` directory.

@@ -1,0 +1,11 @@
+[scripts]
+main = "python src_py/main.py"
+
+[packages]
+pydub = "*"
+openai-whisper = "*"
+"pyannote.audio" = "*"
+librosa = "*"
+resampy = "*"
+
+[dev-packages]
