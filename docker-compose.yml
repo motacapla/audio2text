@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  audio-diarizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+      - HF_AUTH_TOKEN=${HF_AUTH_TOKEN}
