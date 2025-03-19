@@ -1,12 +1,11 @@
+import os
 import whisper
 from pyannote.audio import Pipeline
 from pyannote.audio import Audio
 
-import secret
-
 pipeline = Pipeline.from_pretrained(
     "pyannote/speaker-diarization-3.1",
-    use_auth_token=secret.HF_AUTH_TOKEN,
+    use_auth_token=os.environ.get("HF_AUTH_TOKEN"),
 )
 audio = Audio(sample_rate=16000, mono=True)
 model = whisper.load_model("large-v3-turbo")

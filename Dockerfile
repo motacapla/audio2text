@@ -13,9 +13,9 @@ COPY .env /app/
 
 RUN pip install -r requirements.txt
 
-COPY src_py /app/src_py
+COPY src /app/src
 COPY data /app/data
 
-RUN chmod +x /app/src_py/main.py
+RUN chmod +x /app/src/main.py
 
-CMD ["python", "src_py/main.py"]
+CMD ["python", "src/main.py"]

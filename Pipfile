@@ -1,5 +1,5 @@
 [scripts]
-main = "python src_py/main.py"
+main = "python src/main.py"
 
 [packages]
 pydub = "*"

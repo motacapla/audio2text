@@ -1,14 +1,13 @@
-# cookbook
-
+# audio2text
 ## Diarize audio file from zoom's record
 ### Prerequisites
 - create `data` directory
 - put `.m4a` files in `data` directory
+- create `.env` file in the root directory
 
 ### Run
 ```
-$ pipenv install
-$ pipenv run main
+$ docker-compose build && docker-compose up
 ```
 
 ### Result
