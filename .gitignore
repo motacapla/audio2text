@@ -3,3 +3,10 @@
 secret.py
 *.pyc
 .env
+*.gguf
+*.wav
+*.mp3
+*.m4a
+*.ogg
+*.flac
+*.aac
