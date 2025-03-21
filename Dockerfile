@@ -16,6 +16,6 @@ RUN pip install -r requirements.txt
 COPY src /app/src
 COPY data /app/data
 
-RUN chmod +x /app/src/main.py
+RUN chmod +x /app/src/usecases/zoom2text.py
 
-CMD ["python", "src/main.py"]
+CMD ["python", "src/usecases/zoom2text.py"]
