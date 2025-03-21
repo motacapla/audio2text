@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 
 from src.entities import diarizer
 from src.entities import local_llm
-from src.entities import tts
+from src.entities import reader
 from src.entities import record
 
 if __name__ == "__main__":
@@ -20,8 +20,9 @@ if __name__ == "__main__":
     response = local_llm.ask_ollama(json_dict["conversation"])
     print(response)
 
-    response_output_path = tts.generate_speech(
-        response, output_path=response_output_path, verbose=True
-    )
+    # response_output_path = tts.generate_speech(
+    #     response, output_path=response_output_path, verbose=True
+    # )
+    reader.synthesize_voice(response, speaker=1, filename=response_output_path)
 
     playsound.playsound(response_output_path)

@@ -3,7 +3,7 @@ import requests
 
 
 def ask_ollama(texts: list[str], max_tokens=10000):
-    prompt = "以下のテキストは音声から抽出したものです。必ず、日本語の一文で簡潔に回答を生成してください。音声が20秒以内に収まる程度の分量にしてください。\n"
+    prompt = "以下のテキストは音声から抽出したものです。相手の名前について言及せずに、質問について回答してください。\n"
     prompt += "\n".join(texts)
     """
     Ollamaに質問して回答を取得する関数

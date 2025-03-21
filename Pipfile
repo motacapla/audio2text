@@ -1,5 +1,11 @@
 [scripts]
-main = "python src/main.py"
+zoom2text = "python src/usecases/zoom2text.py"
+conversation = "python src/usecases/conversation.py"
+tts = "python src/entities/tts.py"
+reply = "python src/entities/reply.py"
+local_llm = "python src/entities/local_llm.py"
+diarizer = "python src/entities/diarizer.py"
+reader = "python src/entities/reader.py"
 
 [packages]
 pydub = "*"
@@ -7,5 +13,9 @@ openai-whisper = "*"
 "pyannote.audio" = "*"
 librosa = "*"
 resampy = "*"
+soundfile = "*"
+transformers = "*"
+parler-tts = "*"
+rubyinserter = "*"
 
 [dev-packages]
