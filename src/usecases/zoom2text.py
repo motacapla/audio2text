@@ -1,8 +1,12 @@
 import glob
 import json
+import sys
+import os
 
-import convert_m4a
-import diarizer
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+from src.entities import convert_m4a
+from src.entities import diarizer
 
 if __name__ == "__main__":
     m4a_files = glob.glob("data/*.m4a")
